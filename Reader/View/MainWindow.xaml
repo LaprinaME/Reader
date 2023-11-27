@@ -1,0 +1,90 @@
+﻿<Window x:Class="Reader.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Reader"
+        mc:Ignorable="d"
+        Title="Reader" Height="400" Width="600" WindowStyle="SingleBorderWindow">
+    <Window.Resources>
+        <!-- Ваши ресурсы остаются без изменений -->
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Times New Roman" />
+            <Setter Property="Background" Value="#2E8B57" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Margin" Value="5" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="White" />
+                    <!-- Цвет фона при наведении -->
+                    <Setter Property="Foreground" Value="Black" />
+                    <!-- Цвет текста при наведении -->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="FlowDocumentReader">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Image Source="background.png" Stretch="Fill" />
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Кнопка для загрузки файла -->
+            <Button Name="LoadWordButton" Content="Загрузить File" 
+                    Command="{Binding LoadWordCommand}" 
+                    Style="{StaticResource ButtonStyle}" 
+                    VerticalAlignment="Center" HorizontalAlignment="Left" 
+                    Height="30" Margin="10,0,0,0" Width="110" />
+
+            <!-- Текстовый блок для отображения информации о загруженном файле -->
+            <TextBlock x:Name="FileLoadedText" Text="{Binding FileLoadedText}" Foreground="White" FontFamily="Times New Roman" FontSize="16"  TextAlignment="Left" HorizontalAlignment="Left" Margin="125,14,0,13" Width="410" />
+
+            <!-- Панель кнопок Play и Pause -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <!-- Кнопка Play -->
+                <Button x:Name="PlayButton" Command="{Binding PlayCommand}" Width="30" Height="30">
+                    <!-- Иконка Play -->
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="play_icon.png" Stretch="Fill" />
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <!-- Кнопка Pause -->
+                <Button x:Name="PauseButton" Command="{Binding PauseCommand}" Width="30" Height="30">
+                    <!-- Иконка Pause -->
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="pause_icon.png" Stretch="Fill" />
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="Transparent" />
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+
+            <!-- Контейнер для отображения текста -->
+            <Grid Background="White" Margin="0,10,0,24" Grid.Row="1">
+                <FlowDocumentReader Name="WordContainer" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
