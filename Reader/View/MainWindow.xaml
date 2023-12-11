@@ -80,11 +80,17 @@
                     </Button.Style>
                 </Button>
             </StackPanel>
-
             <!-- Контейнер для отображения текста -->
             <Grid Background="White" Margin="0,10,0,24" Grid.Row="1">
-                <FlowDocumentReader Name="WordContainer" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                <FlowDocumentReader Name="WordContainer" Document="{Binding FlowDocument}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                
+                <!--<FlowDocumentReader Name="WordContainer" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <FlowDocumentReader.Document>
+                        <Binding Path="FlowDocument" RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type Window}}" />
+                    </FlowDocumentReader.Document>
+                </FlowDocumentReader>-->
             </Grid>
+
         </Grid>
     </Grid>
 </Window>
